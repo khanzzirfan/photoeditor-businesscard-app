@@ -13,7 +13,7 @@
     "dev:server": "babel server --out-dir dist/server --source-maps --watch",
     "build:client": "cross-env next build client",
     "build:server": "babel server --out-dir dist/server --source-maps",
-    "build": "npm run build:client && npm run build:server",
+    "build": "npm run build:client",
     "preserve": "npm run build",
     "serve": "cross-env NODE_ENV=production firebase serve --only functions,hosting",
     "predeploy": "rimraf dist/ && npm run build",
