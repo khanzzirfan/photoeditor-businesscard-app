@@ -1,20 +1,18 @@
-import { NextPageContext } from 'next';
-import Head from 'next/head';
-import { parseCookies } from 'nookies';
-import { ToastProvider } from 'react-toast-notifications';
-import { RecoilRoot } from 'recoil';
-import Notification from '../components/ui/Notification/Notification';
-import NotificationContainer from '../components/ui/Notification/NotificationContainer';
-import AppController from '../controllers/AppController';
-import AuthController from '../controllers/AuthController';
-import VideosController from '../controllers/VideosController';
-import Editor from '../features/editor/Editor';
-import { Plans } from '../interfaces/plans';
-import { AuthInfoDTO, deserializeUserPlanDTO } from '../interfaces/user';
-import { plansState } from '../state/atoms/plans';
-import { userInfoState, userPlanState } from '../state/atoms/user';
-import { api } from '../utils/api/api';
-import { fetchAuthInfo } from '../utils/api/auth';
+import { NextPageContext } from "next";
+import Head from "next/head";
+import { parseCookies } from "nookies";
+import { ToastProvider } from "react-toast-notifications";
+import { RecoilRoot } from "recoil";
+import Notification from "../components/ui/Notification/Notification";
+import NotificationContainer from "../components/ui/Notification/NotificationContainer";
+import AppController from "../controllers/AppController";
+import AuthController from "../controllers/AuthController";
+import VideosController from "../controllers/VideosController";
+import Editor from "../features/editor/Editor";
+import { Plans } from "../interfaces/plans";
+import { AuthInfoDTO, deserializeUserPlanDTO } from "../interfaces/user";
+import { plansState } from "../state/atoms/plans";
+import { userInfoState, userPlanState } from "../state/atoms/user";
 
 interface Props {
   plans: Plans;
@@ -35,20 +33,14 @@ export default function Home({ plans, authInfo }: Props) {
         />
         <meta
           name="og:title"
-          content="Mediabits.io | Turn your audio into sharable video"
+          content="editor.io | Turn your audio into sharable video"
         />
         <meta
           name="og:description"
           content="Create engaging videos for your podcast, music and audio clips to share on social media."
         />
-        <meta
-          name="og:image"
-          content="https://app.mediabits.io/images/fb.png"
-        />
-
         <link rel="manifest" href="/manifest.json" />
-        <link rel="canonical" href="https://app.mediabits.io" />
-        <title>Mediabits.io - Turn your audio into sharable video</title>
+        <title>Editor.io - Turn your audio into sharable video</title>
       </Head>
 
       <RecoilRoot
@@ -74,7 +66,6 @@ export default function Home({ plans, authInfo }: Props) {
           }}
         >
           <AuthController />
-          <VideosController />
           <Editor />
         </ToastProvider>
       </RecoilRoot>
@@ -84,16 +75,16 @@ export default function Home({ plans, authInfo }: Props) {
 
 export async function getServerSideProps(ctx: NextPageContext) {
   const { userToken } = parseCookies(ctx);
-
-  const [plans, authInfo] = await Promise.all([
-    api.get<Plans>('/plans').then(({ data }) => data),
-    userToken ? fetchAuthInfo(userToken).catch(() => null) : null,
-  ]);
+  console.log("userToken", userToken);
+  // const [plans, authInfo] = await Promise.all([
+  //   api.get<Plans>("/plans").then(({ data }) => data),
+  //   userToken ? fetchAuthInfo(userToken).catch(() => null) : null,
+  // ]);
 
   return {
     props: {
-      plans,
-      authInfo,
+      plans: { free: { durationLimit: 100 } },
+      authInfo: null,
     },
   };
 }

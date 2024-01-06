@@ -1,6 +1,6 @@
-import React from 'react';
-import classNames from '../../../utils/classNames';
-import ExternalLink from '../ExternalLink';
+import React from "react";
+import classNames from "../../../utils/classNames";
+import ExternalLink from "../ExternalLink";
 
 interface Props {
   className?: string;
@@ -10,10 +10,10 @@ function Logo({ className }: Props) {
   return (
     <ExternalLink
       className={classNames(
-        'relative flex py-3.5 border-transparent border-t-2 border-b px-2 justify-center bg-gray-900',
+        "relative flex py-3.5 border-transparent border-t-2 border-b px-2 justify-center bg-gray-900",
         className
       )}
-      to="https://app.mediabits.io"
+      to="https://app.editorio.io"
       newTab
     >
       <svg className="h-6" viewBox="0 0 150 88" fill="none">

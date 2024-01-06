@@ -1,9 +1,9 @@
 // @ts-ignore-next-line
-const { withSentryConfig } = require('@sentry/nextjs');
-const withTM = require('next-transpile-modules')([
-  'imask/esm',
-  'react-imask',
-  '@vincaslt/mp3',
+const { withSentryConfig } = require("@sentry/nextjs");
+const withTM = require("next-transpile-modules")([
+  "imask/esm",
+  "react-imask",
+  "@vincaslt/mp3",
 ]);
 
 const SentryWebpackPluginOptions = {
@@ -17,9 +17,10 @@ module.exports = withSentryConfig(
   {
     sentry: {
       disableServerWebpackPlugin: true,
+      disableClientWebpackPlugin: false,
     },
     ...withTM({
-      distDir: '../dist/client',
+      distDir: "../dist/client",
     }),
   },
   SentryWebpackPluginOptions

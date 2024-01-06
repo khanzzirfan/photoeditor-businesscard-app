@@ -1,17 +1,17 @@
-import { Transition } from '@headlessui/react';
+import { Transition } from "@headlessui/react";
 import {
   HeartIcon,
   QuestionMarkCircleIcon,
   XIcon,
-} from '@heroicons/react/solid';
-import React from 'react';
-import { useRecoilState, useRecoilValue } from 'recoil';
-import Button from '../../../../components/ui/Button';
-import ExternalLink from '../../../../components/ui/ExternalLink';
-import GithubIcon from '../../../../components/ui/Icons/GithubIcon';
-import { appReadyState } from '../../../../state/atoms/app';
-import { openNewsletterWindow } from '../../../../utils/newsletter';
-import { infoPopupState } from '../../state/atoms/ui';
+} from "@heroicons/react/solid";
+import React from "react";
+import { useRecoilState, useRecoilValue } from "recoil";
+import Button from "../../../../components/ui/Button";
+import ExternalLink from "../../../../components/ui/ExternalLink";
+import GithubIcon from "../../../../components/ui/Icons/GithubIcon";
+import { appReadyState } from "../../../../state/atoms/app";
+import { openNewsletterWindow } from "../../../../utils/newsletter";
+import { infoPopupState } from "../../state/atoms/ui";
 
 function InfoPopup() {
   const appReady = useRecoilValue(appReadyState);
@@ -47,13 +47,13 @@ function InfoPopup() {
           />
 
           <h2 className="text-base font-semibold tracking-wide text-white mb-2">
-            🤔 About Mediabits.io
+            🤔 About Editor.io
           </h2>
 
           <p className="text-sm text-gray-400 mb-3">
-            Mediabits.io is an editor to create small videos for your podcast or
-            other audio content, that you can then share on social media.{' '}
-            <ExternalLink to="https://mediabits.io" newTab>
+            Editor.io is an editor to create small videos for your podcast or
+            other audio content, that you can then share on social media.{" "}
+            <ExternalLink to="https://Editor.io" newTab>
               Learn more.
             </ExternalLink>
           </p>
@@ -82,10 +82,10 @@ function InfoPopup() {
                 <ExternalLink
                   newTab
                   type="light"
-                  to="mailto:support@mediabits.io"
+                  to="mailto:support@unknown.io"
                   className="ml-1"
                 >
-                  support@mediabits.io
+                  support@unknown.io
                 </ExternalLink>
               </p>
               <Button
@@ -100,7 +100,7 @@ function InfoPopup() {
             <ExternalLink
               newTab
               type="custom"
-              to="https://github.com/MediaBits-io/editor"
+              to="https://github.com/unknown/editor"
               className="ml-auto text-gray-300 hover:text-white focus:text-white focus:outline-none transition duration-150"
             >
               <GithubIcon className="w-8 h-8" />

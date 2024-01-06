@@ -1,8 +1,8 @@
-import Konva from 'konva';
-import { Filter } from 'konva/types/Node';
-import { uniq } from 'ramda';
-import { EditorPanel } from './interfaces/Editor';
-import { ShapeType } from './interfaces/Shape';
+import Konva from "konva";
+import { Filter } from "konva/types/Node";
+import { uniq } from "ramda";
+import { EditorPanel } from "./interfaces/Editor";
+import { ShapeType } from "./interfaces/Shape";
 
 export const TARGET_FPS = 60;
 
@@ -13,9 +13,9 @@ export const IMAGE_FILTERS: { [filter: string]: Filter } = {
   blur: Konva.Filters.Blur,
 };
 
-export const SHAPE_PROPERTIES_PANEL: Partial<
-  { [key in ShapeType]: EditorPanel }
-> = {
+export const SHAPE_PROPERTIES_PANEL: Partial<{
+  [key in ShapeType]: EditorPanel;
+}> = {
   [ShapeType.Image]: EditorPanel.ImageProperties,
   [ShapeType.Text]: EditorPanel.TextProperties,
   [ShapeType.ProgressBar]: EditorPanel.ProgressBarProperties,
@@ -34,50 +34,50 @@ export const SHAPE_TOOL_PANEL: Partial<{ [key in ShapeType]: EditorPanel }> = {
 };
 
 export enum DefaultFonts {
-  Headline = 'Archivo Black',
-  Regular = 'Arial',
-  Handwritten = 'Bad Script',
+  Headline = "Archivo Black",
+  Regular = "Arial",
+  Handwritten = "Bad Script",
 }
 
 export const ALL_FONTS = [
-  'Abril Fatface',
-  'Alfa Slab One',
-  'Anton',
-  'Archivo Black',
-  'Arial',
-  'Arial Black',
-  'Arimo',
-  'Bad Script',
-  'Bangers',
-  'Cinzel',
-  'Courier',
-  'Georgia',
-  'Iceberg',
-  'Lobster',
-  'Open Sans',
-  'Oleo Script',
-  'Oswald',
-  'Pacifico',
-  'Permanent Marker',
-  'Playfair Display',
-  'Rakkas',
-  'Roboto',
-  'Rubik',
-  'Shrikhand',
-  'Squada One',
-  'Times',
-  'Titan One',
-  'Work Sans',
-  'ZCOOL KuaiLe',
-  'Zilla Slab Highlight',
+  "Abril Fatface",
+  "Alfa Slab One",
+  "Anton",
+  "Archivo Black",
+  "Arial",
+  "Arial Black",
+  "Arimo",
+  "Bad Script",
+  "Bangers",
+  "Cinzel",
+  "Courier",
+  "Georgia",
+  "Iceberg",
+  "Lobster",
+  "Open Sans",
+  "Oleo Script",
+  "Oswald",
+  "Pacifico",
+  "Permanent Marker",
+  "Playfair Display",
+  "Rakkas",
+  "Roboto",
+  "Rubik",
+  "Shrikhand",
+  "Squada One",
+  "Times",
+  "Titan One",
+  "Work Sans",
+  "ZCOOL KuaiLe",
+  "Zilla Slab Highlight",
 ].sort();
 
 export const PROPRIETARY_FONTS = [
-  'Courier',
-  'Arial',
-  'Arial Black',
-  'Georgia',
-  'Times',
+  "Courier",
+  "Arial",
+  "Arial Black",
+  "Georgia",
+  "Times",
 ];
 
 export const LOADABLE_FONTS = ALL_FONTS.filter(
@@ -90,3 +90,9 @@ export const PRELOAD_FONTS = uniq([
   ),
   ...LOADABLE_FONTS.slice(0, 8),
 ]);
+
+export const DROPTYPES = {
+  IMAGE: "image",
+  AUDIO: "audio",
+  VIDEO: "video",
+};

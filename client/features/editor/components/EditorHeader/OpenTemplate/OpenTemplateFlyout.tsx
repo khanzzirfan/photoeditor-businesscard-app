@@ -1,25 +1,25 @@
-import { CloudDownloadIcon } from '@heroicons/react/solid';
-import * as Sentry from '@sentry/react';
-import React, { useRef, useState } from 'react';
-import { useToasts } from 'react-toast-notifications';
-import { useRecoilValue, useSetRecoilState } from 'recoil';
-import ExternalLink from '../../../../../components/ui/ExternalLink';
-import Flyout from '../../../../../components/ui/Flyout';
-import UploadToDiskIcon from '../../../../../components/ui/Icons/UploadToDiskIcon';
-import NotificationContent from '../../../../../components/ui/Notification/NotificationContent';
-import { readBlobAsText } from '../../../../../utils/blob';
-import { EditorAreaContainer } from '../../../containers/EditorAreaContainer';
-import { Template } from '../../../interfaces/StageConfig';
-import { isLoadingState } from '../../../state/atoms/editor';
-import useTemplateDispatcher from '../../../state/dispatchers/template';
-import { hasUnsavedChangesSelector } from '../../../state/selectors/editor';
+import { CloudDownloadIcon } from "@heroicons/react/solid";
+import * as Sentry from "@sentry/react";
+import React, { useRef, useState } from "react";
+import { useToasts } from "react-toast-notifications";
+import { useRecoilValue, useSetRecoilState } from "recoil";
+import ExternalLink from "../../../../../components/ui/ExternalLink";
+import Flyout from "../../../../../components/ui/Flyout";
+import UploadToDiskIcon from "../../../../../components/ui/Icons/UploadToDiskIcon";
+import NotificationContent from "../../../../../components/ui/Notification/NotificationContent";
+import { readBlobAsText } from "../../../../../utils/blob";
+import { EditorAreaContainer } from "../../../containers/EditorAreaContainer";
+import { Template } from "../../../interfaces/StageConfig";
+import { isLoadingState } from "../../../state/atoms/editor";
+import useTemplateDispatcher from "../../../state/dispatchers/template";
+import { hasUnsavedChangesSelector } from "../../../state/selectors/editor";
 import {
   autoCorrectTemplateIssues,
   loadTemplateFonts,
   loadTemplateImages,
-} from '../../../utils/template';
-import DiscardChangesModal from '../../DiscardChangesModal';
-import FlyoutMenuButton from '../FlyoutMenuButton';
+} from "../../../utils/template";
+import DiscardChangesModal from "../../DiscardChangesModal";
+import FlyoutMenuButton from "../FlyoutMenuButton";
 
 interface Props {
   isOpen: boolean;
@@ -40,12 +40,12 @@ function OpenTemplateFlyout({ isOpen, close, targetElement }: Props) {
     const file = e.currentTarget.files?.[0];
 
     if (inputRef.current) {
-      inputRef.current.value = '';
+      inputRef.current.value = "";
     }
 
     if (
       file &&
-      (file.type === 'application/json' || file.name.endsWith('.json'))
+      (file.type === "application/json" || file.name.endsWith(".json"))
     ) {
       let loadingTimeout: any;
 
@@ -73,12 +73,12 @@ function OpenTemplateFlyout({ isOpen, close, targetElement }: Props) {
             <ExternalLink
               className="mx-1"
               newTab
-              to="mailto:support@mediabits.io"
+              to="mailto:support@unknown.io"
             >
-              support@mediabits.io
+              support@unknown.io
             </ExternalLink>
           </NotificationContent>,
-          { appearance: 'error', autoDismiss: false }
+          { appearance: "error", autoDismiss: false }
         );
         if (loadingTimeout) {
           clearTimeout(loadingTimeout);
@@ -134,8 +134,8 @@ function OpenTemplateFlyout({ isOpen, close, targetElement }: Props) {
         />
         <FlyoutMenuButton
           title="Import from cloud"
-          description="Download the template from mediabits.io cloud (PRO)"
-          onClick={() => console.info('not implemented yet')}
+          description="Download the template from unknown cloud (PRO)"
+          onClick={() => console.info("not implemented yet")}
           icon={CloudDownloadIcon}
           onlyPro
         />

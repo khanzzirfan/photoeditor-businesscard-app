@@ -1,16 +1,16 @@
-import { DownloadIcon } from '@heroicons/react/outline';
-import React, { useCallback, useState } from 'react';
-import { useToasts } from 'react-toast-notifications';
-import { useRecoilCallback, useRecoilValue } from 'recoil';
-import Button from '../../../../components/ui/Button';
-import ExternalLink from '../../../../components/ui/ExternalLink';
-import NotificationContent from '../../../../components/ui/Notification/NotificationContent';
-import useVideos from '../../../../hooks/useVideos';
-import classNames from '../../../../utils/classNames';
-import { openNewsletterWindow } from '../../../../utils/newsletter';
-import { audioState } from '../../state/atoms/audio';
-import { audioModalState } from '../../state/atoms/ui';
-import useAudioDispatcher from '../../state/dispatchers/audio';
+import { DownloadIcon } from "@heroicons/react/outline";
+import React, { useCallback, useState } from "react";
+import { useToasts } from "react-toast-notifications";
+import { useRecoilCallback, useRecoilValue } from "recoil";
+import Button from "../../../../components/ui/Button";
+import ExternalLink from "../../../../components/ui/ExternalLink";
+import NotificationContent from "../../../../components/ui/Notification/NotificationContent";
+import useVideos from "../../../../hooks/useVideos";
+import classNames from "../../../../utils/classNames";
+import { openNewsletterWindow } from "../../../../utils/newsletter";
+import { audioState } from "../../state/atoms/audio";
+import { audioModalState } from "../../state/atoms/ui";
+import useAudioDispatcher from "../../state/dispatchers/audio";
 
 function ExportButton() {
   const { exportVideo } = useVideos();
@@ -28,12 +28,12 @@ function ExportButton() {
           <NotificationContent title="Video exported successfully">
             It may take a few minutes for the video to get processed
           </NotificationContent>,
-          { appearance: 'success' }
+          { appearance: "success" }
         );
         if (isNewRegularUser) {
           addToast(
             <NotificationContent title="Keep up to date">
-              You seem to be enjoying mediabits.io
+              You seem to be enjoying Editor.io
               <br />
               Would you like to stay informed about latest updates and special
               offers?
@@ -46,7 +46,7 @@ function ExportButton() {
                 Subscribe to our newsletter
               </Button>
             </NotificationContent>,
-            { appearance: 'info', autoDismiss: false }
+            { appearance: "info", autoDismiss: false }
           );
         }
       } catch (e) {
@@ -58,12 +58,12 @@ function ExportButton() {
             <ExternalLink
               className="mx-1"
               newTab
-              to="mailto:support@mediabits.io"
+              to="mailto:support@unknown.io"
             >
-              support@mediabits.io
+              support@unknown.io
             </ExternalLink>
           </NotificationContent>,
-          { appearance: 'error', autoDismiss: false }
+          { appearance: "error", autoDismiss: false }
         );
       } finally {
         setLoading(false);
@@ -94,11 +94,11 @@ function ExportButton() {
 
   return (
     <Button
-      className={classNames('w-40', audio && 'shadow')}
+      className={classNames("w-40", audio && "shadow")}
       loading={loading}
       onClick={handleClickExport}
       icon={DownloadIcon}
-      type={audio ? 'primary' : 'gray'}
+      type={audio ? "primary" : "gray"}
     >
       Generate video
     </Button>

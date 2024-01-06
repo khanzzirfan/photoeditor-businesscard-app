@@ -1,9 +1,9 @@
-import { CloudUploadIcon } from '@heroicons/react/solid';
-import React from 'react';
-import Flyout from '../../../../../components/ui/Flyout';
-import DownloadToDiskIcon from '../../../../../components/ui/Icons/DownloadToDiskIcon';
-import useTemplate from '../../../hooks/useTemplate';
-import FlyoutMenuButton from '../FlyoutMenuButton';
+import { CloudUploadIcon } from "@heroicons/react/solid";
+import React from "react";
+import Flyout from "../../../../../components/ui/Flyout";
+import DownloadToDiskIcon from "../../../../../components/ui/Icons/DownloadToDiskIcon";
+import useTemplate from "../../../hooks/useTemplate";
+import FlyoutMenuButton from "../FlyoutMenuButton";
 
 interface Props {
   isOpen: boolean;
@@ -40,8 +40,8 @@ function SaveTemplateFlyout({ close, isOpen, targetElement }: Props) {
       />
       <FlyoutMenuButton
         title="Export to cloud"
-        description="Upload the template to mediabits.io cloud (PRO)"
-        onClick={() => console.info('not implemented yet')}
+        description="Upload the template to Editor.io cloud (PRO)"
+        onClick={() => console.info("not implemented yet")}
         icon={CloudUploadIcon}
         onlyPro
       />

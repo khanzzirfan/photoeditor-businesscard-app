@@ -1,20 +1,23 @@
-import Konva from 'konva';
-import { KonvaEventObject } from 'konva/types/Node';
-import React, { useCallback, useEffect, useRef } from 'react';
-import { Rect, Shape, Text } from 'react-konva';
-import { ElementRefsContainer } from '../../containers/ElementRefsContainer';
-import { TextConfig } from '../../interfaces/Shape';
-import InteractiveKonvaElement, { MIN_WIDTH } from './InteractiveKonvaElement';
+import Konva from "konva";
+import { KonvaEventObject } from "konva/types/Node";
+import { useClickAway } from "react-use";
+import React, { useCallback, useEffect, useRef, useState } from "react";
+import { Rect, Shape, Text } from "react-konva";
+import { ElementRefsContainer } from "../../containers/ElementRefsContainer";
+import { TextConfig } from "../../interfaces/Shape";
+import InteractiveKonvaElement, { MIN_WIDTH } from "./InteractiveKonvaElement";
+import { EditableTextInput } from "./EditableTextInput";
+import useElementsDispatcher from "../../state/dispatchers/elements";
 
 const MIN_FONT_SIZE = 8;
 
 const enabledAnchors = [
-  'middle-left',
-  'middle-right',
-  'top-left',
-  'top-right',
-  'bottom-left',
-  'bottom-right',
+  "middle-left",
+  "middle-right",
+  "top-left",
+  "top-right",
+  "bottom-left",
+  "bottom-right",
 ];
 interface Props {
   id: string;
@@ -23,9 +26,17 @@ interface Props {
 }
 
 function TextRenderer({ id, props, centered }: Props) {
+  const [isEditing, setIsEditing] = useState<boolean>(false);
+  const [editingText, setEditingText] = useState<string>("");
   const backgroundRef = useRef<Konva.Rect | null>(null);
   const textRef = useRef<Konva.Text | null>(null);
   const { transformerRef } = ElementRefsContainer.useContainer();
+  const { updateElementProps } = useElementsDispatcher();
+  const clickAwayRef = useRef(null);
+
+  const handleChangeText = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    updateElementProps<TextConfig>(id, { text: e.target.value });
+  };
 
   const transform = useCallback(
     (
@@ -35,7 +46,7 @@ function TextRenderer({ id, props, centered }: Props) {
       const textNode = evt.target as Konva.Text;
       const anchor = transformer.getActiveAnchor();
 
-      if (!['middle-right', 'middle-left'].includes(anchor)) {
+      if (!["middle-right", "middle-left"].includes(anchor)) {
         return {};
       }
 
@@ -50,6 +61,10 @@ function TextRenderer({ id, props, centered }: Props) {
     },
     []
   );
+
+  const handleDblClick = useCallback(() => {
+    setIsEditing(true);
+  }, []);
 
   const transformEnd = useCallback(
     (evt: KonvaEventObject<Event>): Partial<TextConfig> => {
@@ -95,8 +110,46 @@ function TextRenderer({ id, props, centered }: Props) {
 
   useEffect(() => {
     transformerRef.current?.forceUpdate();
+    setEditingText(props.text || "");
   }, [props, transformerRef]);
 
+  const handleTextChange = useCallback(
+    (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+      setEditingText(e.currentTarget.value);
+      handleChangeText(e);
+    },
+    []
+  );
+
+  const handleEscapeKeys = useCallback(
+    (evt: React.KeyboardEvent<HTMLTextAreaElement>) => {
+      if (evt.key === "Escape" || evt.key === "Enter") {
+        setIsEditing(false);
+      }
+    },
+    []
+  );
+
+  const { x, y, width, height } = props;
+  // track click away ref
+  useClickAway(clickAwayRef, () => {
+    setIsEditing(false);
+  });
+
+  if (isEditing) {
+    return (
+      <EditableTextInput
+        x={x || 10}
+        y={y || 10}
+        width={width || 200}
+        height={height || 200}
+        value={editingText}
+        onChange={handleTextChange}
+        onKeyDown={handleEscapeKeys}
+        ref={clickAwayRef}
+      />
+    );
+  }
   return (
     <InteractiveKonvaElement
       id={id}
@@ -117,11 +170,13 @@ function TextRenderer({ id, props, centered }: Props) {
             {...props}
             {...additionalProps}
             fillEnabled={true}
-            fill={props.fillEnabled ? props.fill : 'transparent'}
+            fill={props.fillEnabled ? props.fill : "transparent"}
             ref={(el) => {
               additionalProps.ref.current = el;
               textRef.current = el;
             }}
+            onDblClick={handleDblClick}
+            onDblTap={handleDblClick}
           />
         </>
       )}

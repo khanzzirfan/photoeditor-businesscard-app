@@ -1,21 +1,20 @@
-import * as Sentry from '@sentry/react';
-import React from 'react';
-import { useRecoilValue } from 'recoil';
-import { EditorPanel } from '../../interfaces/Editor';
+import React from "react";
+import { useRecoilValue } from "recoil";
+import { EditorPanel } from "../../interfaces/Editor";
 import {
   activePanelState,
   selectedElementIdState,
-} from '../../state/atoms/editor';
-import SideMenuPanel from '../ui/SideMenuPanel';
-import ElementToolPanel from './ElementToolPanel';
-import ImagePropertiesPanel from './ImagePropertiesPanel/ImagePropertiesPanel';
-import ImageToolPanel from './ImageToolPanel';
-import ProgressBarPropertiesPanel from './ProgressBarPropertiesPanel/ProgressBarPropertiesPanel';
-import SettingsToolPanel from './SettingsToolPanel/SettingsToolPanel';
-import SubtitlesToolPanel from './SubtitlesToolPanel/SubtitlesToolPanel';
-import TextPropertiesPanel from './TextPropertiesPanel/TextPropertiesPanel';
-import TextToolPanel from './TextToolPanel';
-import WaveformPropertiesPanel from './WaveformPropertiesPanel/WaveformPropertiesPanel';
+} from "../../state/atoms/editor";
+import SideMenuPanel from "../ui/SideMenuPanel";
+import ElementToolPanel from "./ElementToolPanel";
+import ImagePropertiesPanel from "./ImagePropertiesPanel/ImagePropertiesPanel";
+import ImageToolPanel from "./ImageToolPanel";
+import ProgressBarPropertiesPanel from "./ProgressBarPropertiesPanel/ProgressBarPropertiesPanel";
+import SettingsToolPanel from "./SettingsToolPanel/SettingsToolPanel";
+import SubtitlesToolPanel from "./SubtitlesToolPanel/SubtitlesToolPanel";
+import TextPropertiesPanel from "./TextPropertiesPanel/TextPropertiesPanel";
+import TextToolPanel from "./TextToolPanel";
+import WaveformPropertiesPanel from "./WaveformPropertiesPanel/WaveformPropertiesPanel";
 
 function EditorMenuPanel() {
   const activePanel = useRecoilValue(activePanelState);
@@ -46,7 +45,6 @@ function EditorMenuPanel() {
     case EditorPanel.Subtitles:
       return <SubtitlesToolPanel />;
     default:
-      Sentry.captureMessage(`Panel ${activePanel} does not exist`);
       return <SideMenuPanel />;
   }
 }

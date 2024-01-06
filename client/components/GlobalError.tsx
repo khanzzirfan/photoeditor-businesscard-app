@@ -1,8 +1,8 @@
-import { EmojiSadIcon } from '@heroicons/react/outline';
-import React from 'react';
-import MainArea from './layout/MainArea';
-import Button from './ui/Button';
-import ExternalLink from './ui/ExternalLink';
+import { EmojiSadIcon } from "@heroicons/react/outline";
+import React from "react";
+import MainArea from "./layout/MainArea";
+import Button from "./ui/Button";
+import ExternalLink from "./ui/ExternalLink";
 
 function GlobalError() {
   const handleClickRefresh = () => {
@@ -22,12 +22,8 @@ function GlobalError() {
         </h1>
         <div>
           Contact support via
-          <ExternalLink
-            className="mx-1"
-            newTab
-            to="mailto:support@mediabits.io"
-          >
-            support@mediabits.io
+          <ExternalLink className="mx-1" newTab to="unknown@unknown.io">
+            support@unknown.io
           </ExternalLink>
           for assistance.
         </div>
