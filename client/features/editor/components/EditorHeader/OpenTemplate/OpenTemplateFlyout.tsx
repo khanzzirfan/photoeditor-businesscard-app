@@ -1,5 +1,4 @@
 import { CloudDownloadIcon } from "@heroicons/react/solid";
-import * as Sentry from "@sentry/react";
 import React, { useRef, useState } from "react";
 import { useToasts } from "react-toast-notifications";
 import { useRecoilValue, useSetRecoilState } from "recoil";
@@ -66,7 +65,6 @@ function OpenTemplateFlyout({ isOpen, close, targetElement }: Props) {
 
         setLoadedTemplate(template, getScreenDimensions());
       } catch (e) {
-        Sentry.captureException(e);
         addToast(
           <NotificationContent title="Failed to load template">
             Please contact support through

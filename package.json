@@ -8,8 +8,9 @@
     "node": "14"
   },
   "scripts": {
-    "start": "concurrently \"npm:dev:client\" \"npm:dev:server\"",
-    "dev:client": "next client -p 3000",
+    "start": "npm run dev",
+    "start:ps": "concurrently \"npm:dev:client\" \"npm:dev:server\"",
+    "dev": "next client -p 3000",
     "dev:server": "babel server --out-dir dist/server --source-maps --watch",
     "build:client": "cross-env next build client",
     "build:server": "babel server --out-dir dist/server --source-maps",

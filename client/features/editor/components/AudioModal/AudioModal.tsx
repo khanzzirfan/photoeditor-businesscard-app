@@ -1,19 +1,18 @@
-import * as Sentry from '@sentry/react';
-import React, { useEffect, useState } from 'react';
-import { useRecoilState, useRecoilValue } from 'recoil';
-import Alert from '../../../../components/ui/Alert';
-import Modal from '../../../../components/ui/Modal/Modal';
-import ModalAction from '../../../../components/ui/Modal/ModalAction';
-import ModalContent from '../../../../components/ui/Modal/ModalContent';
-import ModalFullActions from '../../../../components/ui/Modal/ModalFullActions';
-import { ENABLE_UPGRADES } from '../../../../constants';
-import { Plan } from '../../../../interfaces/plans';
-import { userPlanState } from '../../../../state/atoms/user';
-import { userPlanInfoSelector } from '../../../../state/selectors/user';
-import { audioModalState } from '../../state/atoms/ui';
-import AudioClipper from '../AudioClipper/AudioClipper';
-import useAudioClipper from '../AudioClipper/useAudioClipper';
-import FileTooBig from './FileTooBig';
+import React, { useEffect, useState } from "react";
+import { useRecoilState, useRecoilValue } from "recoil";
+import Alert from "../../../../components/ui/Alert";
+import Modal from "../../../../components/ui/Modal/Modal";
+import ModalAction from "../../../../components/ui/Modal/ModalAction";
+import ModalContent from "../../../../components/ui/Modal/ModalContent";
+import ModalFullActions from "../../../../components/ui/Modal/ModalFullActions";
+import { ENABLE_UPGRADES } from "../../../../constants";
+import { Plan } from "../../../../interfaces/plans";
+import { userPlanState } from "../../../../state/atoms/user";
+import { userPlanInfoSelector } from "../../../../state/selectors/user";
+import { audioModalState } from "../../state/atoms/ui";
+import AudioClipper from "../AudioClipper/AudioClipper";
+import useAudioClipper from "../AudioClipper/useAudioClipper";
+import FileTooBig from "./FileTooBig";
 
 const MAX_FILE_SIZE = 50 * 1024 * 1024;
 
@@ -24,10 +23,8 @@ interface ClipBounds {
 }
 
 function AudioModalInner() {
-  const [
-    { onContinue, onCancel, initialAudio },
-    setAudioModalState,
-  ] = useRecoilState(audioModalState);
+  const [{ onContinue, onCancel, initialAudio }, setAudioModalState] =
+    useRecoilState(audioModalState);
   const userPlan = useRecoilValue(userPlanState);
   const userPlanInfo = useRecoilValue(userPlanInfoSelector);
   const [loading, setLoading] = useState(false);
@@ -39,7 +36,7 @@ function AudioModalInner() {
   useEffect(() => {
     if (audio) {
       const audioEl = new Audio();
-      audioEl.addEventListener('loadedmetadata', (e) => {
+      audioEl.addEventListener("loadedmetadata", (e) => {
         setTotalDuration((e.target as HTMLAudioElement).duration);
       });
       audioEl.src = audio.url;
@@ -64,7 +61,6 @@ function AudioModalInner() {
       onContinue?.(audioBuffer);
       closeModal();
     } catch (e) {
-      Sentry.captureException(e);
     } finally {
       setLoading(false);
     }
@@ -97,7 +93,7 @@ function AudioModalInner() {
   const fileTooBig = audio && audio.data.size > MAX_FILE_SIZE;
   const isFree = userPlan.plan === Plan.Free;
 
-  const title = audio ? 'Trim audio' : 'Add audio';
+  const title = audio ? "Trim audio" : "Add audio";
 
   const renderError = () => {
     if (!clipDuration) {

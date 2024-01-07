@@ -1,5 +1,4 @@
-import type { Config } from 'webfontloader';
-import * as Sentry from '@sentry/react';
+import type { Config } from "webfontloader";
 
 export async function loadFonts(families: string[], config?: Config) {
   await new Promise<void>(async (resolve, reject) => {
@@ -7,7 +6,7 @@ export async function loadFonts(families: string[], config?: Config) {
       resolve();
     }
 
-    const WebFont = await import('webfontloader');
+    const WebFont = await import("webfontloader");
 
     try {
       WebFont.load({
@@ -15,9 +14,7 @@ export async function loadFonts(families: string[], config?: Config) {
           families,
         },
         active: resolve,
-        fontinactive: (family) => {
-          Sentry.captureMessage(`Failed to load font "${family}"`);
-        },
+        fontinactive: (family) => {},
         ...config,
       });
     } catch (e) {

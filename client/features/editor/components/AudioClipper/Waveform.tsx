@@ -1,22 +1,21 @@
-import React, { useRef, useEffect, useState, useCallback } from 'react';
+import React, { useRef, useEffect, useState, useCallback } from "react";
 import {
   PauseIcon,
   PlayIcon,
   ChevronDoubleLeftIcon,
-} from '@heroicons/react/solid';
-import IMask from 'imask';
-import CursorPlugin from 'wavesurfer.js/dist/plugin/wavesurfer.cursor';
-import RegionsPlugin from 'wavesurfer.js/dist/plugin/wavesurfer.regions';
-import TimelinePlugin from 'wavesurfer.js/dist/plugin/wavesurfer.timeline';
-import Button from '../../../../components/ui/Button';
-import TimestampInput from './TimestampInput';
-import useThrottle from '../../../../utils/hooks/useThrottle';
+} from "@heroicons/react/solid";
+import IMask from "imask";
+import CursorPlugin from "wavesurfer.js/dist/plugin/wavesurfer.cursor";
+import RegionsPlugin from "wavesurfer.js/dist/plugin/wavesurfer.regions";
+import TimelinePlugin from "wavesurfer.js/dist/plugin/wavesurfer.timeline";
+import Button from "../../../../components/ui/Button";
+import useThrottle from "../../../../utils/hooks/useThrottle";
 import {
   dateToSeconds,
   dateToTimeString,
   formatDuration,
   secondsToDate,
-} from '../../../../utils/time';
+} from "../../../../utils/time";
 
 interface Props {
   audioFile: Blob;
@@ -43,8 +42,8 @@ function Waveform({
   const timelineRef = useRef<HTMLDivElement>(null);
   const wavesurferRef = useRef<WaveSurfer>();
   const [isPlaying, setIsPlaying] = useState(false);
-  const [startTime, setStartTime] = useState('00:00:00.000');
-  const [endTime, setEndTime] = useState('00:00:15.000');
+  const [startTime, setStartTime] = useState("00:00:00.000");
+  const [endTime, setEndTime] = useState("00:00:15.000");
 
   const updateRegionRange = useThrottle(
     useCallback((region: any) => {
@@ -64,12 +63,12 @@ function Waveform({
     const container = containerRef.current;
 
     const init = async () => {
-      const WaveSurfer = (await import('wavesurfer.js')).default;
+      const WaveSurfer = (await import("wavesurfer.js")).default;
       wavesurferRef.current = WaveSurfer.create({
         container,
-        waveColor: 'white',
-        cursorColor: 'transparent',
-        progressColor: '#fce96a',
+        waveColor: "white",
+        cursorColor: "transparent",
+        progressColor: "#fce96a",
         partialRender: true,
         normalize: true,
         forceDecode: true,
@@ -78,22 +77,22 @@ function Waveform({
           CursorPlugin.create({
             showTime: true,
             opacity: 1,
-            color: '#3f83f8',
+            color: "#3f83f8",
             customShowTimeStyle: {
-              'background-color': '#000000',
-              border: '1px solid #3f83f8',
-              color: '#ffffff',
-              padding: '0.1rem 0.25rem',
-              'font-size': '0.75rem',
+              "background-color": "#000000",
+              border: "1px solid #3f83f8",
+              color: "#ffffff",
+              padding: "0.1rem 0.25rem",
+              "font-size": "0.75rem",
             },
           }),
           TimelinePlugin.create({
             container: timelineRef.current,
-            primaryColor: '#e1effe',
-            secondaryColor: '#e1effe',
-            primaryFontColor: '#e1effe',
-            secondaryFontColor: '#e1effe',
-            unlabeledNotchColor: '#64748b',
+            primaryColor: "#e1effe",
+            secondaryColor: "#e1effe",
+            primaryFontColor: "#e1effe",
+            secondaryFontColor: "#e1effe",
+            unlabeledNotchColor: "#64748b",
             formatTimeCallback: formatDuration,
           }),
         ],
@@ -141,15 +140,15 @@ function Waveform({
           start,
           end,
           minLength: minDuration,
-          color: 'rgba(63, 131, 248, 0.25)',
+          color: "rgba(63, 131, 248, 0.25)",
           handleStyle: {
             left: {
-              minWidth: '2px',
-              backgroundColor: 'rgba(63, 131, 248)',
+              minWidth: "2px",
+              backgroundColor: "rgba(63, 131, 248)",
             },
             right: {
-              minWidth: '2px',
-              backgroundColor: 'rgba(63, 131, 248)',
+              minWidth: "2px",
+              backgroundColor: "rgba(63, 131, 248)",
             },
           },
         });
@@ -177,10 +176,10 @@ function Waveform({
         }
       };
 
-      wavesurferRef.current.on('region-updated', handleRegionUpdate);
-      wavesurferRef.current.on('ready', handleReady);
-      wavesurferRef.current.on('pause', handleTogglePlay);
-      wavesurferRef.current.on('play', handleTogglePlay);
+      wavesurferRef.current.on("region-updated", handleRegionUpdate);
+      wavesurferRef.current.on("ready", handleReady);
+      wavesurferRef.current.on("pause", handleTogglePlay);
+      wavesurferRef.current.on("play", handleTogglePlay);
     };
 
     init();
@@ -313,19 +312,6 @@ function Waveform({
               icon={ChevronDoubleLeftIcon}
               onClick={handleSeekToStart}
               round
-            />
-          </div>
-          <div className="flex items-center">
-            <TimestampInput
-              label="Start"
-              value={startTime}
-              onChange={handleChangeStart}
-            />
-            <TimestampInput
-              label="End"
-              value={endTime}
-              onChange={handleChangeEnd}
-              className="ml-2"
             />
           </div>
         </div>
