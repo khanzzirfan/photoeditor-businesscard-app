@@ -1,4 +1,5 @@
 import React from "react";
+// @ts-ignore
 import Slider from "react-slick";
 import { useRecoilState } from "recoil";
 import SideMenuPanel from "../ui/SideMenuPanel";
@@ -63,7 +64,7 @@ function ImageToolPanel() {
   return (
     <SideMenuPanel title="Image">
       <DropzoneFiles onMediaUpload={onMediaUpload} />
-      <div class="px-1 mt-4">
+      <div className="px-1 mt-4">
         <Slider {...settings}>
           {images.map((file: ImageState) => (
             // @ts-ignore

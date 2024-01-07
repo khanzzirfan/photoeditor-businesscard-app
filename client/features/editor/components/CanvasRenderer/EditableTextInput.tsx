@@ -1,6 +1,8 @@
 import React from "react";
+// @ts-ignore
 import { Html } from "react-konva-utils";
 
+// @ts-ignore
 function getStyle(width: number, height: number): React.CSSProperties {
   const isFirefox = navigator.userAgent.toLowerCase().indexOf("firefox") > -1;
   const baseStyle = {
